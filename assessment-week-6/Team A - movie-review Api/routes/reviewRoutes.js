@@ -1,16 +1,12 @@
-//Abdulrasaq Adewale
-//linking of express, expressRouter, and Reviews(from controllers) to review routes
-const express = require("express");
-const router = express.Router({mergepParams: true});
+const expess = require("express");
+const router = express.Router();
 
-const { getReviewsByMovie, getReviewById, createReview, deleteReview } = require("../controllers/reviewController")
+const reviewController = require("../controllers/reviewController");
+const validateReview = require('../middleware/validateReview');
 
-router.get('/:movieId')
-router.post = require('../middleware/validateReview')
-router.get('/', validateReview, createReview)
-
-router.route("/:reviewId")
-.get(getReviewById)
-.delete(deleteReview);
+router.get('/:movieId', reviewController.getReviewsByMovie);
+router.post('/', validateReview, reviewController.createReview);
+router.get('/:id', reviewController.getReviewById);
+router.delete('/:id', reviewController.deleteReview)
 
 module.export = router;
