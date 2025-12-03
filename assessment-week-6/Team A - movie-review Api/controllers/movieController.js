@@ -89,7 +89,7 @@ exports.getMovieStats = (req, res) => {
     }
     const movieReviews = reviews.filter(r => r.movieId === movieId);
     const numberOfReviews = movieReviews.length;
-    const averageRating = movieReviews.reduce((acc, curr) => acc + curr.rating, 0) / numberOfReviews || 0;
+    const averageRating = numberOfReviews > 0 ? movieReviews.reduce((acc, curr) => acc + curr.rating, 0) / numberOfReviews : 0;
     res.status(200).json({ movieId, numberOfReviews, averageRating: averageRating.toFixed(2) });
 }
 
